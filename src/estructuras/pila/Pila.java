@@ -59,4 +59,26 @@ public class Pila<Tipo> {
   public boolean estaVacia() {
     return cima == null;
   }
+
+  /**
+   * Método para recorrer la pila y obtener sus elementos en orden.
+   * 
+   * @return Un String con los elementos de la pila desde la cima hasta la base.
+   */
+  public String recorrer() {
+    if (estaVacia()) {
+      return "La pila está vacía.";
+    }
+    StringBuilder resultado = new StringBuilder();
+    NodoP<Tipo> actual = cima;
+    while (actual != null) {
+      resultado.append(actual.dato.toString());
+      if (actual.siguiente != null) {
+        resultado.append(" -> ");
+      }
+      actual = actual.siguiente;
+    }
+    return resultado.toString();
+  }
+
 }

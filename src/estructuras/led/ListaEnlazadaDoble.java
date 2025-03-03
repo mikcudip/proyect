@@ -53,7 +53,7 @@ public class ListaEnlazadaDoble<Tipo> {
   /**
    * Método para mostrar los elementos de la lista en orden.
    */
-  public void mostrar() {
+  public void recorrer() {
     NodoLED<Tipo> actual = inicio;
     while (actual != null) {
       System.out.print(actual.dato + " ");
@@ -136,6 +136,13 @@ public class ListaEnlazadaDoble<Tipo> {
     }
 
     return false; // No se encontró el elemento en la lista
+  }
+
+  public boolean estaVacia() {
+    if (inicio == null) {
+      return true;
+    }
+    return false;
   }
 
 }

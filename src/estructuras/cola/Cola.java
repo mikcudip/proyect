@@ -32,7 +32,7 @@ public class Cola<Tipo> {
    * @throws IllegalStateException si la cola está vacía
    */
   public Tipo peek() {
-    if (this.isEmpty()) {
+    if (this.estaVacia()) {
       throw new IllegalStateException("Cola vacía");
     }
     return cola[frente];
@@ -45,7 +45,7 @@ public class Cola<Tipo> {
    * @throws IllegalStateException si la cola está vacía
    */
   public Tipo dequeue() {
-    if (this.isEmpty()) {
+    if (this.estaVacia()) {
       throw new IllegalStateException("Cola vacía");
     }
     Tipo elemento = cola[frente];
@@ -74,7 +74,7 @@ public class Cola<Tipo> {
    * 
    * @return true si la cola está vacía, falso en caso contrario
    */
-  public boolean isEmpty() {
+  public boolean estaVacia() {
     return tamanio == 0;
   }
 
@@ -101,5 +101,29 @@ public class Cola<Tipo> {
       }
     }
     return false;
+  }
+
+  /**
+   * Método para recorrer la cola y obtener sus elementos en orden
+   * 
+   * @return Un String con los elementos de la cola separados por comas
+   */
+  public String recorrer() {
+    if (this.estaVacia()) {
+      return "La cola está vacía.";
+    }
+    StringBuilder resultado = new StringBuilder();
+    for (int i = 0; i < tamanio; i++) {
+      int indice = (frente + i) % capacidad; // Índice circular
+      resultado.append(cola[indice].toString());
+      if (i < tamanio - 1) {
+        resultado.append(", ");
+      }
+    }
+    return resultado.toString();
+  }
+
+  public int getTamanio() {
+    return tamanio;
   }
 }

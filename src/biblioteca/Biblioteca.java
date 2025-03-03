@@ -87,7 +87,7 @@ public class Biblioteca {
    * Atiende la lista de espera, colocando el libro disponible en la estantería.
    */
   public void atenderEspera() {
-    if (!librosEnEspera.isEmpty()) {
+    if (!librosEnEspera.estaVacia()) {
       Libro libro = librosEnEspera.dequeue();
       estanteria.insertarAlFinal(libro);
       System.out.println("Libro entregado a quien lo esperaba: " + libro.getTitulo());
@@ -97,15 +97,46 @@ public class Biblioteca {
   }
 
   /**
-   * Muestra el catálogo en orden ascendente.
+   * Método para mostrar el estado actual de la biblioteca, incluyendo
+   * los libros en la estantería, los libros devueltos (pila) y
+   * los libros en espera (cola).
    */
-  public void mostrarCatalogo() {
-    if (catalogo.getRaiz() == null) {
-      System.out.println("El catálogo está vacío.");
-      return;
+  public void mostrarEstadoBiblioteca() {
+    System.out.println("\n--- Estado de la Biblioteca ---");
+
+    // Mostrar la estantería
+    System.out.println("Estantería:");
+    if (estanteria.estaVacia()) {
+      System.out.println("   La estantería está vacía.");
+    } else {
+      estanteria.recorrer(); // Asumiendo que ListaEnlazadaDoble tiene un método mostrar()
     }
-    System.out.println("Catálogo de libros (InOrden):");
-    catalogo.inOrden(catalogo.getRaiz());
-    System.out.println();
+
+    // Mostrar la pila de libros devueltos
+    System.out.println("\nLibros Devueltos (Pila):");
+    if (librosDevueltos.estaVacia()) {
+      System.out.println("   No hay libros devueltos.");
+    } else {
+      System.out.println("   " + librosDevueltos.recorrer());
+    }
+
+    // Mostrar la cola de libros en espera
+    System.out.println("\nLibros en Espera (Cola):");
+    if (librosEnEspera.estaVacia()) {
+      System.out.println("   No hay libros en espera.");
+    } else {
+      System.out.print("   ");
+      for (int i = 0; i < librosEnEspera.getTamanio(); i++) {
+        Libro libro = librosEnEspera.dequeue(); // Sacamos el libro
+        System.out.print(libro.getTitulo());
+        if (i < librosEnEspera.getTamanio()) {
+          System.out.print(" -> ");
+        }
+        librosEnEspera.enqueue(libro); // Lo volvemos a insertar para mantener la cola
+      }
+      System.out.println();
+    }
+    System.out.println("\n--- ----------------- ---");
   }
+
 }

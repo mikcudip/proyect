@@ -19,7 +19,7 @@ public class Main {
 
     // Mostrar catálogo de libros
     System.out.println("Catalogo de Libros:");
-    biblioteca.mostrarCatalogo();
+    biblioteca.mostrarEstadoBiblioteca();
     // Catálogo de libros (InOrden):
     // 1 - 1984
     // 2 - Cien años de soledad
@@ -38,6 +38,7 @@ public class Main {
     System.out.println("Libros en espera debido a que ya fueron prestados:");
     biblioteca.prestarLibro(2); // Libro en espera: Cien años de soledad
     biblioteca.prestarLibro(6); // Libro en espera: Orgullo y prejuicio
+    biblioteca.mostrarEstadoBiblioteca();
 
     // Devolver algunos libros
     biblioteca.devolverLibro(2); // Libro devuelto: Cien años de soledad
@@ -69,7 +70,7 @@ public class Main {
 
     // Mostrar catálogo nuevamente
     System.out.println("Catalogo de Libros:");
-    biblioteca.mostrarCatalogo();
+    biblioteca.mostrarEstadoBiblioteca();
     // Catálogo de libros (InOrden):
     // 1 - 1984
     // 2 - Cien años de soledad
